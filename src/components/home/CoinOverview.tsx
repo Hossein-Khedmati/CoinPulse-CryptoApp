@@ -1,6 +1,6 @@
-import { fetcher } from '@/lib/coingecko.actions';
-import { formatCurrency } from '@/lib/utils';
-import Image from 'next/image';
+import { fetcher } from "@/lib/coingecko.actions";
+import { formatCurrency } from "@/lib/utils";
+import Image from "next/image";
 
 export const CoinOverviewFallback = () => {
   return (
@@ -12,36 +12,36 @@ export const CoinOverviewFallback = () => {
           <h1 className="header-line-lg skeleton" />
         </div>
       </div>
-      <div className='chart'>
-        <div className='chart-skeleton skeleton'/>
+      <div className="chart">
+        <div className="chart-skeleton skeleton" />
       </div>
     </div>
   );
 };
 
-
 const CoinOverview = async () => {
-      const coin = await fetcher<CoinDetailsData>("coins/bitcoin", {
-        dex_pair_format: "symbol",
-      });
+  let coin;
+  try {
+    coin = await fetcher<CoinDetailsData>("coins/bitcoin", {
+      dex_pair_format: "symbol",
+    });
+  } catch (error) {
+    console.error("Error fetching overview coins", error);
+    return <CoinOverviewFallback />;
+  }
   return (
-            <div id="coin-overview">
-          <div className="header pt-2">
-            <Image
-              src={coin.image.large}
-              alt={coin.name}
-              width={56}
-              height={56}
-            />
-            <div className="info">
-              <p>
-                {coin.name} / {coin.symbol.toUpperCase()}
-              </p>
-              <h1>{formatCurrency(coin.market_data.current_price.usd)}</h1>
-            </div>
-          </div>
+    <div id="coin-overview">
+      <div className="header pt-2">
+        <Image src={coin.image.large} alt={coin.name} width={56} height={56} />
+        <div className="info">
+          <p>
+            {coin.name} / {coin.symbol.toUpperCase()}
+          </p>
+          <h1>{formatCurrency(coin.market_data.current_price.usd)}</h1>
         </div>
-  )
-}
+      </div>
+    </div>
+  );
+};
 
-export default CoinOverview
+export default CoinOverview;

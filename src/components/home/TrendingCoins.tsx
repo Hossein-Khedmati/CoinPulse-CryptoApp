@@ -55,11 +55,16 @@ export const TrendingCoinsFallback = () => {
 };
 
 const TrendingCoins = async () => {
-  const trendingCoins = await fetcher<{ coins: TrendingCoin[] }>(
+  let trendingCoins
+  try{
+  trendingCoins = await fetcher<{ coins: TrendingCoin[] }>(
     "search/trending",
     undefined,
     300,
-  );
+  );}catch(error){
+    console.error('Error fetching trending coins' , error);
+    return <TrendingCoinsFallback/>
+  }
 
   const columns: DataTableColumn<TrendingCoin>[] = [
     {
