@@ -204,7 +204,7 @@
   }
 
   #candlestick-chart {
-    @apply p-3 mt-5 rounded-lg bg-dark-500;
+    @apply p-3 rounded-lg bg-dark-500;
 
     .chart-header {
       @apply flex flex-col gap-3 xl:flex-row xl:items-center mb-4 font-semibold text-[#e6eef8] text-[20px];
