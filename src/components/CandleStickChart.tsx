@@ -20,7 +20,7 @@ const CandleStickChart = ({
   children,
   data,
   coinId,
-  height = 360,
+  height = 500,
   initialPeriod = "daily",
 }: CandlestickChartProps) => {
   const chartContainerRef = useRef<HTMLDivElement | null>(null);
@@ -117,7 +117,7 @@ const CandleStickChart = ({
   }, [period, ohlcData]);
 
   return (
-    <div id="candlestick-chart">
+    <div id="candlestick-chart" className="h-full">
       <div className="chart-header">
         <div className="flex-1">{children}</div>
         <div className="button-group">
@@ -141,7 +141,7 @@ const CandleStickChart = ({
           ))}
         </div>
       </div>
-      <div ref={chartContainerRef} className="chart" style={{ height }} />
+      <div ref={chartContainerRef} className="chart " style={{ height }} />
     </div>
   );
 };

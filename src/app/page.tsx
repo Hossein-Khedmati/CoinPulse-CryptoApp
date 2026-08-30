@@ -1,4 +1,5 @@
 import DataTable from "@/components/DataTable";
+import Categories, { CategoriesSkeleton } from "@/components/home/Categories";
 import CoinOverview, {
   CoinOverviewFallback,
 } from "@/components/home/CoinOverview";
@@ -19,7 +20,9 @@ const Page = async () => {
         </Suspense>
       </section>
       <section className="w-full mt-7 space-y-4">
-        <p>Categories</p>
+        <Suspense fallback={<CategoriesSkeleton />}>
+          <Categories />
+        </Suspense>
       </section>
     </main>
   );
